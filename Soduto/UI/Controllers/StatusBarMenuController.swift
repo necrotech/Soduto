@@ -149,21 +149,22 @@ public class StatusBarMenuController: NSObject, NSWindowDelegate, NSMenuDelegate
         var index = self.statusBarMenu.index(of: self.availableDevicesItem)
         assert(index != -1, "availableDevicesItem expected to be item of statusBarMenu")
         for device in devices {
-            let item = NSMenuItem(title: device.name, action: nil, keyEquivalent: "")
+            let service = self.serviceManager?.services.first(where: { $0 is BatteryService }) as? BatteryService
+            let batteryStatus = service?.statuses.first(where: { $0.key == device.id })?.value
+            let currentCharge = "\(batteryStatus?.currentCharge ?? 0)"
+            let item = NSMenuItem(title: "\(currentCharge)% \(device.name)", action: nil, keyEquivalent: "")
             item.tag = InterfaceElementTags.availableDeviceMenuItem.rawValue
             item.submenu = DeviceMenu(device: device)
-            item.image = batteryImage(for: device)
+            item.image = batteryImage(device: device, service: service)
             index += 1
             self.statusBarMenu.insertItem(item, at: index)
         }
     }
     
-    private func batteryImage(for device: Device) -> NSImage? {
+    private func batteryImage(device: Device, service: BatteryService?) -> NSImage? {
         assert(self.serviceManager != nil, "serviceManager property is not setup correctly")
-        guard let serviceManager = self.serviceManager else { return nil }
-        guard let service = serviceManager.services.first(where: { $0 is BatteryService }) as? BatteryService else { return nil }
-        guard let batteryStatus = service.statuses.first(where: { $0.key == device.id })?.value else { return nil }
-        
+        guard let batteryStatus = service?.statuses.first(where: { $0.key == device.id })?.value else { return nil }
+
         var rect = NSRect(x: 0, y: 0, width: 24, height: 13)
         let image = NSImage(size: rect.size, flipped: false) { _ in
             let mainIcon = #imageLiteral(resourceName: "batteryStatusIcon")
