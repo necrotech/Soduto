@@ -1,3 +1,8 @@
+# This repo is custom version
+
+- Added ability to open the notifications service.
+- Added ability to display battery status value.
+
 # Soduto
 
 ## What is it?

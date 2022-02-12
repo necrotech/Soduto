@@ -972,7 +972,7 @@
 				TargetAttributes = {
 					8433015F1D2D8CB8008934BB = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeamName = "Giedrius Stanevicius (Personal Team)";
+						DevelopmentTeam = "";
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -983,6 +983,7 @@
 					};
 					8435AEF51E26DD27005CD719 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -992,6 +993,7 @@
 					};
 					845BC7091E69F00E00DC9B81 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = "";
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
